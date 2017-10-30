@@ -30,8 +30,6 @@ def list_pic(path):
 
 
 if __name__ == '__main__':
-	pics = list_pic(IMG_PATH)
-
 	nc  = int(time.time() * 1000)
 	n   = 8
 	# idx = 0
@@ -58,6 +56,7 @@ if __name__ == '__main__':
 				print "[-] skip: "+img[1]
 
 	print "[*] world"
+	pics = list_pic(IMG_PATH)
 	for idx in [0,7]:
 		post_url = 'http://www.bing.com/HPImageArchive.aspx?format=js&idx=%d&n=%d&nc=%d&pid=hp&scope=web&FORM=QBLH&intlF=&quiz=1&fav=1' % (idx, n, nc)
 		res = requests.get(post_url, cookies=dict(ENSEARCH="BENVER=1"))
