@@ -9,7 +9,7 @@ import re
 IMG_PATH = '/home/cc/downloads/bing_wallpaper'
 
 def get_pic_name(name):
-	pattern = re.compile("](.*)(_EN-US|_ZH-CN)")
+	pattern = re.compile("](.*)(_EN-US|_EN-CN|_ZH-CN)")
 	g = pattern.search(name)
 	if g:
 		return g.groups(0)[0]
@@ -19,7 +19,7 @@ def get_pic_name(name):
 def list_pic(path):
 	pic_name = os.listdir(path)
 	pics = []
-	pattern = re.compile("](.*)(_EN-US|_ZH-CN)")
+	pattern = re.compile("](.*)(_EN-US|_EN-CN|_ZH-CN)")
 
 	for name in pic_name:
 		g = pattern.search(name)
@@ -58,14 +58,14 @@ if __name__ == '__main__':
 	print "[*] world"
 	pics = list_pic(IMG_PATH)
 	for idx in [0,7]:
-		post_url = 'http://www.bing.com/HPImageArchive.aspx?format=js&idx=%d&n=%d&nc=%d&pid=hp&scope=web&FORM=QBLH&intlF=&quiz=1&fav=1' % (idx, n, nc)
+		post_url = 'https://cn.bing.com/HPImageArchive.aspx?format=js&idx=%d&n=%d&nc=%d&pid=hp&quiz=1&fav=1' % (idx, n, nc)
 		res = requests.get(post_url, cookies=dict(ENSEARCH="BENVER=1"))
 		urls = []
 		if res:
 			img_json = res.json()
 			for row in img_json['images']:
 				name = row['url'].rfind('/rb/')
-				urls.append([row['startdate'], row['url'].split('/')[-1], 'http://cn.bing.com' + row['url']])
+				urls.append([row['startdate'], row['url'].split('/')[-1], 'https://cn.bing.com' + row['url']])
 		for img in urls:
 			d1 = datetime.datetime(int(img[0][:4]), int(img[0][4:6]), int(img[0][6:8]))
 			d2 = d1 - datetime.timedelta(days=1)
