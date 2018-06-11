@@ -35,7 +35,7 @@ if __name__ == '__main__':
 	# idx = 0
 	print "[*] cn"
 	for idx in [0,7]:
-		post_url = 'http://cn.bing.com/HPImageArchive.aspx?format=js&idx=%d&n=%d&nc=%d&pid=hp' % (idx, n, nc)
+		post_url = 'https://cn.bing.com/HPImageArchive.aspx?format=js&idx=%d&n=%d&nc=%d&pid=hp&scope=web&FORM=QBLH' % (idx, n, nc)
 		res = requests.get(post_url)
 		urls = []
 		if res:
